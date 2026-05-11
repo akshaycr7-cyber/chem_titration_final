@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Smart Digital Titration System</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="hero">
+      <img class="hero__image" src="assets/hero-smart-titration.png" alt="Smart digital titration setup with Arduino, burette, pH probe and laptop graph">
+      <div class="hero__shade"></div>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#project">Project</a>
+        <a href="#arduino">Arduino</a>
+      </nav>
+      <section class="hero__content">
+        <p class="eyebrow">Chemistry + Electronics + AI</p>
+        <h1>Smart Digital Titration System</h1>
+        <p>
+          Connect your Arduino, collect live pH readings, visualize the pH-volume curve,
+          detect the equivalence point, and auto-grade the experiment result.
+        </p>
+        <div class="hero__actions">
+          <a class="button button--primary" href="#dashboard">Open dashboard</a>
+          <a class="button button--ghost" href="#workflow">View workflow</a>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section id="dashboard" class="band band--dashboard">
+        <div class="section-head">
+          <p class="eyebrow">Live experiment</p>
+          <h2>Arduino Reading Dashboard</h2>
+          <p>Use Chrome or Edge. The browser receives serial data directly from Arduino through USB.</p>
+        </div>
+
+        <div class="dashboard-grid">
+          <aside class="control-panel">
+            <div class="status-row">
+              <span id="connectionDot" class="status-dot"></span>
+              <span id="connectionText">Not connected</span>
+            </div>
+
+            <div class="button-row">
+              <button id="connectBtn" class="button button--primary" type="button">Connect Arduino</button>
+              <button id="disconnectBtn" class="button" type="button" disabled>Disconnect</button>
+            </div>
+
+            <div class="button-row">
+              <button id="startBtn" class="button" type="button" disabled>Start</button>
+              <button id="stopBtn" class="button" type="button" disabled>Stop</button>
+              <button id="simulateBtn" class="button" type="button">Demo Data</button>
+            </div>
+
+            <label class="field">
+              Expected endpoint pH
+              <input id="expectedPh" type="number" step="0.01" value="7.00">
+            </label>
+
+            <label class="field">
+              Expected endpoint volume (mL)
+              <input id="expectedVolume" type="number" step="0.1" value="25.0">
+            </label>
+
+            <label class="field">
+              Grading tolerance
+              <select id="gradeMode">
+                <option value="balanced">Balanced</option>
+                <option value="strict">Strict</option>
+                <option value="lenient">Lenient</option>
+              </select>
+            </label>
+
+            <div class="button-row">
+              <button id="clearBtn" class="button" type="button">Clear</button>
+              <button id="downloadBtn" class="button" type="button">CSV</button>
+            </div>
+
+            <p class="serial-note">
+              Accepted serial formats: JSON <code>{"ph":7.12,"volume":12.4}</code> or CSV <code>7.12,12.4</code>.
+            </p>
+          </aside>
+
+          <section class="readout-panel" aria-label="Live readings">
+            <div class="metric metric--large">
+              <span>Live pH</span>
+              <strong id="phValue">--</strong>
+            </div>
+            <div class="metric">
+              <span>Volume</span>
+              <strong id="volumeValue">-- mL</strong>
+            </div>
+            <div class="metric">
+              <span>Equivalence Point</span>
+              <strong id="endpointValue">Waiting</strong>
+            </div>
+            <div class="metric">
+              <span>Auto Grade</span>
+              <strong id="gradeValue">--/10</strong>
+            </div>
+          </section>
+
+          <section class="graph-panel" aria-label="pH versus volume graph">
+            <div class="graph-toolbar">
+              <h3>pH vs Volume</h3>
+              <span id="sampleCount">0 samples</span>
+            </div>
+            <canvas id="graphCanvas" width="900" height="460"></canvas>
+          </section>
+
+          <section class="analysis-panel">
+            <h3>AI Analysis</h3>
+            <p id="analysisText">
+              Add readings to let the AI-style slope detector identify the equivalence point.
+            </p>
+            <div id="logList" class="log-list" aria-live="polite"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="project" class="band">
+        <div class="section-head">
+          <p class="eyebrow">Complete project coverage</p>
+          <h2>What The System Includes</h2>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <h3>Core Idea</h3>
+            <p>Automates chemical titration using sensors, Arduino, AI analysis and a web app.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Hardware</h3>
+            <p>Arduino UNO, pH probe, servo motor, I2C LCD, LED, buzzer, breadboard, resistor, wires and USB cable.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Software</h3>
+            <p>Arduino code reads pH, controls servo/LED/buzzer/LCD, and sends readings to this web dashboard.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Visualization</h3>
+            <p>The pH-volume curve helps identify the endpoint visually during the titration process.</p>
+          </article>
+          <article class="feature-card">
+            <h3>AI / ML Feature</h3>
+            <p>The app detects the equivalence point by finding the maximum slope in the pH curve.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Auto-Grading</h3>
+            <p>The dashboard compares detected results with expected values and gives marks out of 10.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="workflow" class="band band--flow">
+        <div class="section-head">
+          <p class="eyebrow">Complete workflow</p>
+          <h2>From Solution To Smart Result</h2>
+        </div>
+        <div class="flow">
+          <span>Chemical Solution</span>
+          <span>pH Sensor</span>
+          <span>Arduino</span>
+          <span>Servo Burette</span>
+          <span>LCD / LED / Buzzer</span>
+          <span>Web App</span>
+          <span>AI Endpoint</span>
+          <span>Auto Grade</span>
+        </div>
+      </section>
+
+      <section id="arduino" class="band two-column">
+        <div>
+          <p class="eyebrow">Arduino setup</p>
+          <h2>Upload The Sketch</h2>
+          <p>
+            Open <code>arduino/smart_titration_system.ino</code> in Arduino IDE, install the LCD library,
+            upload it to Arduino UNO, then connect from this dashboard.
+          </p>
+          <ul class="clean-list">
+            <li>pH sensor: <code>A0</code></li>
+            <li>Servo signal: <code>D9</code></li>
+            <li>LED: <code>D6</code></li>
+            <li>Buzzer: <code>D7</code></li>
+            <li>I2C LCD: <code>SDA/SCL</code></li>
+          </ul>
+        </div>
+        <div>
+          <p class="eyebrow">Project notes</p>
+          <h2>Uses, Limits And Scope</h2>
+          <p>
+            Useful for schools, colleges, chemistry labs, research experiments and virtual labs.
+            Calibration is required for accurate pH readings, and future versions can add IoT monitoring,
+            a mobile app and a fully automatic burette.
+          </p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      Smart Digital Titration System using Arduino and AI
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
