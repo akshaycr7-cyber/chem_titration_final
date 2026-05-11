@@ -1,0 +1,6 @@
+.DS_Store
+Thumbs.db
+*.log
+server.err.log
+.vscode/
+sketch_may11a/
