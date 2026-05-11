@@ -7,7 +7,7 @@ Static GitHub Pages website for an Arduino-based titration project. It shows liv
 - `index.html` - website dashboard and project sections
 - `styles.css` - responsive attractive UI
 - `app.js` - Web Serial connection, graph, AI endpoint detection, CSV export
-- `arduino/smart_titration_system.ino` - Arduino UNO sketch
+- `arduino/smart_titration_system/smart_titration_system.ino` - Arduino UNO sketch
 - `assets/hero-smart-titration.png` - generated hero image for the website
 
 ## Arduino Connections
@@ -21,7 +21,7 @@ Static GitHub Pages website for an Arduino-based titration project. It shows liv
 
 ## Arduino Setup
 
-1. Open `arduino/smart_titration_system.ino` in Arduino IDE.
+1. Open `arduino/smart_titration_system/smart_titration_system.ino` in Arduino IDE.
 2. Install these libraries if needed:
    - `Servo`
    - `Wire`
